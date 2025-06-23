@@ -5,6 +5,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultsTab = document.getElementById("pdl-tab-results");
     const resultsList = resultsTab ? resultsTab.querySelector("ul") : null;
 
+    // Utility: Animate fade in
+    function fadeIn(el, duration = 300) {
+        el.style.opacity = 0;
+        el.style.display = 'block';
+        let last = +new Date();
+        const tick = function () {
+            el.style.opacity = +el.style.opacity + (new Date() - last) / duration;
+            last = +new Date();
+            if (+el.style.opacity < 1) {
+                requestAnimationFrame(tick);
+            }
+        };
+        tick();
+    }
+
     // Tab click behavior
     tabs.forEach(tab => {
         tab.addEventListener('click', function () {
@@ -14,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             tabs.forEach(t => t.classList.remove('active'));
 
             const target = document.getElementById('pdl-tab-' + letter);
-            if (target) target.style.display = 'block';
+            if (target) fadeIn(target);
             this.classList.add('active');
         });
     });
@@ -35,16 +50,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 tabs.forEach(t => t.classList.remove('active'));
                 groups.forEach(g => g.style.display = 'none');
 
+                let matches = [];
+
                 document.querySelectorAll('.pdl-group ul li').forEach(li => {
                     const text = li.textContent.toLowerCase();
                     if (text.includes(query)) {
-                        resultsList.appendChild(li.cloneNode(true));
+                        matches.push(li.cloneNode(true));
                     }
                 });
 
-                if (resultsList.children.length > 0) {
-                    resultsTab.style.display = 'block';
-                    resultsTab.style.display = 'block';
+                if (matches.length > 0) {
+                    // Sort alphabetically
+                    matches.sort((a, b) => {
+                        return a.textContent.localeCompare(b.textContent);
+                    });
+
+                    matches.forEach(clone => resultsList.appendChild(clone));
+                    fadeIn(resultsTab);
                 }
             } else {
                 resultsTab.style.display = 'none';
