@@ -1,10 +1,13 @@
 <?php
 /**
  * Plugin Name: Page Directory Listing
- * Description: Displays child pages of a specified parent page, grouped alphabetically by last name.
- * Version: 1.1.0
+ * Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
+ * Description: Displays child pages of a specified parent page, grouped alphabetically by last name using tabs.
+ * Version: 1.2.0
  * Author: Andrew Rhynes
- * GitHub Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
+ * Author URI: https://github.com/eagle4life69
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: page-directory-listing
  */
 
@@ -43,7 +46,7 @@ function pdl_shortcode_output( $atts ) {
         $output .= '<div class="pdl-group" id="pdl-tab-' . esc_attr( $letter ) . '" style="display:none;">';
         $output .= "<h3>$letter</h3><ul>";
         foreach ( $group as $p ) {
-            $output .= '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">' . esc_html( $p->post_title ) . '</a></li>';
+            $output .= '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $p->post_title ) . '</a></li>';
         }
         $output .= '</ul></div>';
     }
