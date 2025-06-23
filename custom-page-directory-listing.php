@@ -3,7 +3,7 @@
  * Plugin Name: Page Directory Listing
  * Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
  * Description: Displays child pages of a specified parent page, grouped alphabetically by last name using tabs.
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: Andrew Rhynes
  * Author URI: https://github.com/eagle4life69
  * License: GPLv2 or later
@@ -35,7 +35,9 @@ function pdl_shortcode_output( $atts ) {
 
     ksort( $grouped );
 
-    $output = '<div class="pdl-tabs">';
+    $output = '<input type="text" id="pdl-search" placeholder="Search names..." class="pdl-search" />';
+
+    $output .= '<div class="pdl-tabs">';
     foreach ( $grouped as $letter => $group ) {
         $output .= '<button class="pdl-tab" data-letter="' . esc_attr( $letter ) . '">' . esc_html( $letter ) . '</button> ';
     }
