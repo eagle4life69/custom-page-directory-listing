@@ -3,7 +3,7 @@ Contributors: eagle4life69
 Tags: shortcode, page list, parent page, alphabetical, tabs  
 Requires at least: 5.0  
 Tested up to: 6.5  
-Stable tag: 1.2.0  
+Stable tag: 1.4.0  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
