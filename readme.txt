@@ -36,6 +36,16 @@ Yes. Override or edit the CSS in `assets/style.css`.
 
 == Changelog ==
 
+= 1.4.0 =
+* Added live search input above tabs
+* Introduced dynamic “Results” tab that shows only matching pages
+* Matching results are sorted alphabetically
+* Added smooth fade transitions between tabs
+* Styled search input and enhanced Results tab appearance
+
+= 1.3.0 =
+* Internal update for search field prep (deprecated by 1.4.0)
+
 = 1.2.0 =
 * Tabs now highlight active selection
 * Moved JavaScript to external file (`assets/script.js`)
@@ -46,7 +56,3 @@ Yes. Override or edit the CSS in `assets/style.css`.
 = 1.1.0 =
 * Initial release with tabbed grouping and shortcode functionality
 
-== Upgrade Notice ==
-
-= 1.2.0 =
-Adds tab highlighting, external JS, auto-open behavior, and target link behavior. Update recommended.
