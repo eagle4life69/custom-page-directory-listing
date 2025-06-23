@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name: Page Directory Listing
- * Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
- * Description: Displays child pages of a specified parent page, grouped alphabetically by last name using tabs.
- * Version: 1.4.0
- * Author: Andrew Rhynes
- * Author URI: https://github.com/eagle4life69
- * Update URI: https://github.com/eagle4life69/custom-page-directory-listing/
- * License: GPLv2 or later
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: page-directory-listing
+ Plugin Name: Page Directory Listing
+ Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
+ Description: Displays child pages of a specified parent page, grouped alphabetically by last name using tabs.
+ Version: 1.5.0
+ Author: Andrew Rhynes
+ Author URI: https://github.com/eagle4life69
+ Update URI: https://github.com/eagle4life69/custom-page-directory-listing/
+ License: GPLv2 or later
+ License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ Text Domain: page-directory-listing
  */
 
 
