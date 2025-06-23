@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const tabs = document.querySelectorAll(".pdl-tab");
     const groups = document.querySelectorAll(".pdl-group");
     const searchInput = document.getElementById("pdl-search");
+    const resultsTab = document.getElementById("pdl-tab-results");
+    const resultsList = resultsTab ? resultsTab.querySelector("ul") : null;
 
     // Tab click behavior
     tabs.forEach(tab => {
@@ -22,39 +24,33 @@ document.addEventListener('DOMContentLoaded', function () {
         tabs[0].click();
     }
 
-    // Search functionality
-if (searchInput) {
-    searchInput.addEventListener('input', function () {
-        const query = this.value.toLowerCase();
-        const resultsTab = document.getElementById('pdl-tab-results');
-        const resultsList = resultsTab.querySelector('ul');
-        resultsList.innerHTML = '';
+    // Search functionality with dynamic Results tab
+    if (searchInput && resultsTab && resultsList) {
+        searchInput.addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            resultsList.innerHTML = '';
+            resultsTab.style.display = 'none';
 
-        if (query.length > 0) {
-            tabs.forEach(t => t.classList.remove('active'));
-            groups.forEach(group => group.style.display = 'none');
+            if (query.length > 0) {
+                tabs.forEach(t => t.classList.remove('active'));
+                groups.forEach(g => g.style.display = 'none');
 
-            let matchCount = 0;
-            document.querySelectorAll('.pdl-group ul li').forEach(li => {
-                const text = li.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    const clone = li.cloneNode(true);
-                    resultsList.appendChild(clone);
-                    matchCount++;
+                document.querySelectorAll('.pdl-group ul li').forEach(li => {
+                    const text = li.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        resultsList.appendChild(li.cloneNode(true));
+                    }
+                });
+
+                if (resultsList.children.length > 0) {
+                    resultsTab.style.display = 'block';
+                    resultsTab.style.display = 'block';
                 }
-            });
-
-            if (matchCount > 0) {
-                resultsTab.style.display = 'block';
             } else {
                 resultsTab.style.display = 'none';
+                resultsList.innerHTML = '';
+                if (tabs.length > 0) tabs[0].click();
             }
-
-        } else {
-            // Reset to first alphabetical tab
-            resultsTab.style.display = 'none';
-            if (tabs.length > 0) tabs[0].click();
-        }
-    });
-}
+        });
+    }
 });
