@@ -1,3 +1,30 @@
+.pdl-tabs {
+    margin: 1.5em 0;
+    text-align: center;
+}
+
+.pdl-tab {
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer;
+    padding: 6px 12px;
+    margin: 3px;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+.pdl-tab:hover {
+    background-color: #e2e2e2;
+}
+
+.pdl-tab.active {
+    background-color: #0073aa;
+    color: #fff;
+    border-color: #0073aa;
+}
+
 .pdl-directory {
     margin: 2em 0;
     font-family: sans-serif;
