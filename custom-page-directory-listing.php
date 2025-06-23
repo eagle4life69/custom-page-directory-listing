@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Page Directory Listing
  * Description: Displays child pages of a specified parent page, grouped alphabetically by last name.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Andrew Rhynes
  * GitHub Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
  * Text Domain: page-directory-listing
@@ -32,15 +32,31 @@ function pdl_shortcode_output( $atts ) {
 
     ksort( $grouped );
 
-    $output = '<div class="pdl-directory">';
+    $output = '<div class="pdl-tabs">';
     foreach ( $grouped as $letter => $group ) {
+        $output .= '<button class="pdl-tab" onclick="pdlShowTab(\'' . esc_attr( $letter ) . '\')">' . esc_html( $letter ) . '</button> ';
+    }
+    $output .= '</div>';
+
+    $output .= '<div class="pdl-directory">';
+    foreach ( $grouped as $letter => $group ) {
+        $output .= '<div class="pdl-group" id="pdl-tab-' . esc_attr( $letter ) . '" style="display:none;">';
         $output .= "<h3>$letter</h3><ul>";
         foreach ( $group as $p ) {
             $output .= '<li><a href="' . esc_url( get_permalink( $p->ID ) ) . '">' . esc_html( $p->post_title ) . '</a></li>';
         }
-        $output .= '</ul>';
+        $output .= '</ul></div>';
     }
     $output .= '</div>';
+
+    $output .= '<script>
+    function pdlShowTab(letter) {
+        const tabs = document.querySelectorAll(".pdl-group");
+        tabs.forEach(tab => tab.style.display = "none");
+        const active = document.getElementById("pdl-tab-" + letter);
+        if (active) active.style.display = "block";
+    }
+    </script>';
 
     return $output;
 }
