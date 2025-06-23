@@ -34,7 +34,7 @@ function pdl_shortcode_output( $atts ) {
 
     $output = '<div class="pdl-tabs">';
     foreach ( $grouped as $letter => $group ) {
-        $output .= '<button class="pdl-tab" onclick="pdlShowTab(\'' . esc_attr( $letter ) . '\')">' . esc_html( $letter ) . '</button> ';
+        $output .= '<button class="pdl-tab" data-letter="' . esc_attr( $letter ) . '">' . esc_html( $letter ) . '</button> ';
     }
     $output .= '</div>';
 
@@ -49,20 +49,12 @@ function pdl_shortcode_output( $atts ) {
     }
     $output .= '</div>';
 
-    $output .= '<script>
-    function pdlShowTab(letter) {
-        const tabs = document.querySelectorAll(".pdl-group");
-        tabs.forEach(tab => tab.style.display = "none");
-        const active = document.getElementById("pdl-tab-" + letter);
-        if (active) active.style.display = "block";
-    }
-    </script>';
-
     return $output;
 }
 add_shortcode( 'page_directory', 'pdl_shortcode_output' );
 
-function pdl_enqueue_styles() {
+function pdl_enqueue_assets() {
     wp_enqueue_style( 'pdl-style', plugin_dir_url( __FILE__ ) . 'assets/style.css' );
+    wp_enqueue_script( 'pdl-script', plugin_dir_url( __FILE__ ) . 'assets/script.js', [], false, true );
 }
-add_action( 'wp_enqueue_scripts', 'pdl_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'pdl_enqueue_assets' );
