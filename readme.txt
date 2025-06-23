@@ -1,37 +1,52 @@
-# Page Directory Listing
+=== Page Directory Listing ===
+Contributors: eagle4life69  
+Tags: shortcode, page list, parent page, alphabetical, tabs  
+Requires at least: 5.0  
+Tested up to: 6.5  
+Stable tag: 1.2.0  
+License: GPLv2 or later  
+License URI: https://www.gnu.org/licenses/gpl-2.0.html  
+Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
 
-**Contributors:** Andrew Rhynes  
-**Tags:** shortcode, page list, parent page, alphabetical, tabs  
-**Requires at least:** 5.0  
-**Tested up to:** 6.5  
-**Stable tag:** 1.1.0  
-**License:** GPLv2 or later  
-**License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
+Displays child pages of a specified parent page, grouped alphabetically by last name using a tabbed interface.
 
-Displays child pages of a specified parent page, grouped alphabetically by last name with clickable tabs for filtering.
+== Description ==
 
----
+This plugin displays a list of child pages under a specified parent page. The pages are grouped by the first letter of their last name (parsed from the title) and can be browsed using clickable alphabetical tabs.
 
-## 📌 Features
+Useful for directories of people, places, or topics organized by name.
 
-- Lists child pages of a specified parent page
-- Groups pages by last name initial (parsed from the page title)
-- Displays clickable A–Z tabs to filter by initial
-- Highlights selected tab and shows corresponding group
-- Automatically shows the first available group tab on page load
-- Easy shortcode integration and simple styling
+== Installation ==
 
----
+1. Upload the `custom-page-directory-listing` folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Use the shortcode `[page_directory parent_id=123]` in any page or post. Replace `123` with the parent page ID.
 
-## ⚙️ How to Use
+== Frequently Asked Questions ==
 
-1. **Install the plugin:**
-   - Upload the folder `custom-page-directory-listing` to your `/wp-content/plugins/` directory.
-   - Or use the WordPress dashboard to upload and activate.
+= How are last names determined? =
+The last word in each page's title is treated as the last name and used for sorting/grouping.
 
-2. **Activate the plugin.**
+= Can I change the styling? =
+Yes. Override or edit the CSS in `assets/style.css`.
 
-3. **Use the shortcode:**
+== Screenshots ==
 
-```plaintext
-[page_directory parent_id=123]
+1. Example of tabbed alphabetical directory layout.
+
+== Changelog ==
+
+= 1.2.0 =
+* Tabs now highlight active selection
+* Moved JavaScript to external file (`assets/script.js`)
+* Default tab (first alphabetically) auto-opens on load
+* All page links now open in a new tab with `target="_blank"`
+* Updated plugin headers for better WordPress compatibility
+
+= 1.1.0 =
+* Initial release with tabbed grouping and shortcode functionality
+
+== Upgrade Notice ==
+
+= 1.2.0 =
+Adds tab highlighting, external JS, auto-open behavior, and target link behavior. Update recommended.
