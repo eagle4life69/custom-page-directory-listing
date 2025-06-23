@@ -23,33 +23,38 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Search functionality
-    if (searchInput) {
-        searchInput.addEventListener('input', function () {
-            const query = this.value.toLowerCase();
+if (searchInput) {
+    searchInput.addEventListener('input', function () {
+        const query = this.value.toLowerCase();
+        const resultsTab = document.getElementById('pdl-tab-results');
+        const resultsList = resultsTab.querySelector('ul');
+        resultsList.innerHTML = '';
 
-            groups.forEach(group => {
-                const items = group.querySelectorAll('li');
-                let hasVisibleItem = false;
+        if (query.length > 0) {
+            tabs.forEach(t => t.classList.remove('active'));
+            groups.forEach(group => group.style.display = 'none');
 
-                items.forEach(li => {
-                    const text = li.textContent.toLowerCase();
-                    const match = text.includes(query);
-                    li.style.display = match ? '' : 'none';
-                    if (match) hasVisibleItem = true;
-                });
-
-                group.style.display = hasVisibleItem ? 'block' : 'none';
+            let matchCount = 0;
+            document.querySelectorAll('.pdl-group ul li').forEach(li => {
+                const text = li.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const clone = li.cloneNode(true);
+                    resultsList.appendChild(clone);
+                    matchCount++;
+                }
             });
 
-            // Clear tab highlighting if searching
-            if (query.length > 0) {
-                tabs.forEach(t => t.classList.remove('active'));
+            if (matchCount > 0) {
+                resultsTab.style.display = 'block';
             } else {
-                // Restore first tab if search is cleared
-                if (tabs.length > 0) {
-                    tabs[0].click();
-                }
+                resultsTab.style.display = 'none';
             }
-        });
-    }
+
+        } else {
+            // Reset to first alphabetical tab
+            resultsTab.style.display = 'none';
+            if (tabs.length > 0) tabs[0].click();
+        }
+    });
+}
 });
