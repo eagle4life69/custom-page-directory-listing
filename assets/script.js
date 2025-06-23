@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Auto-open the "A" tab on page load
-    const defaultTab = document.querySelector('.pdl-tab[data-letter="A"]');
-    if (defaultTab) defaultTab.click();
+    // Auto-open the first tab in order
+    if (tabs.length > 0) {
+        tabs[0].click();
+    }
 });
