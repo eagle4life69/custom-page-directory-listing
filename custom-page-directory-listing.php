@@ -3,7 +3,7 @@
  Plugin Name: Page Directory Listing
  Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
  Description: Displays child pages of a specified parent page, grouped alphabetically by last name using tabs.
- Version: 1.5.0
+ Version: 1.4.1
  Author: Andrew Rhynes
  Author URI: https://github.com/eagle4life69
  Update URI: https://github.com/eagle4life69/custom-page-directory-listing/
