@@ -3,7 +3,7 @@ Contributors: eagle4life69
 Tags: shortcode, page list, parent page, alphabetical, tabs  
 Requires at least: 5.0  
 Tested up to: 6.5  
-Stable tag: 1.4.0  
+Stable tag: 1.5.0  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
@@ -36,6 +36,11 @@ Yes. Override or edit the CSS in `assets/style.css`.
 
 == Changelog ==
 
+= 1.5.0 =
+* Improved last name sorting logic
+* Now intelligently ignores suffixes (Jr., Sr., II, III, IV) when sorting and grouping
+* Ensures pages are grouped and ordered more accurately by last name
+
 = 1.4.0 =
 * Added live search input above tabs
 * Introduced dynamic “Results” tab that shows only matching pages
@@ -55,4 +60,3 @@ Yes. Override or edit the CSS in `assets/style.css`.
 
 = 1.1.0 =
 * Initial release with tabbed grouping and shortcode functionality
-
