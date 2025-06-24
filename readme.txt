@@ -36,6 +36,10 @@ Yes. Override or edit the CSS in `assets/style.css`.
 
 == Changelog ==
 
+= 1.5.1 =
+* Fixed PHP crash due to escaped variable names
+* Cleaned up sorting logic and ensured compatibility with suffix parsing
+
 = 1.5.0 =
 * Improved last name sorting logic
 * Now intelligently ignores suffixes (Jr., Sr., II, III, IV) when sorting and grouping
