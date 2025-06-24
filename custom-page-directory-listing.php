@@ -2,7 +2,7 @@
 /*
  Plugin Name: Page Directory Listing
  Description: Displays child pages of a specified parent page, grouped alphabetically by last name using tabs.
- Version: 1.5.0
+ Version: 1.5.1
  Author: Andrew Rhynes
  Author URI: https://github.com/eagle4life69
  GitHub Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
@@ -27,31 +27,31 @@ function pdl_shortcode_output( $atts ) {
 
     $grouped = [];
 
-    usort(\$pages, function(\$a, \$b) {
-        \$suffixes = ['jr', 'sr', 'ii', 'iii', 'iv'];
+    usort($1, function($1, $1) {
+        $1 = ['jr', 'sr', 'ii', 'iii', 'iv'];
 
-        function extract_last_name(\$title, \$suffixes) {
-            \$parts = explode(' ', trim(\$title));
-            \$last = strtolower(end(\$parts));
-            if (in_array(trim(\$last, '.'), \$suffixes)) {
-                array_pop(\$parts); // remove suffix
-                \$last = strtolower(end(\$parts));
+        function extract_last_name($1, $1) {
+            $1 = explode(' ', trim($1));
+            $1 = strtolower(end($1));
+            if (in_array(trim($1, '.'), $1)) {
+                array_pop($1); // remove suffix
+                $1 = strtolower(end($1));
             }
-            return \$last;
+            return $1;
         }
 
-        \$a_last = extract_last_name(\$a->post_title, \$suffixes);
-        \$b_last = extract_last_name(\$b->post_title, \$suffixes);
+        $1 = extract_last_name($1->post_title, $1);
+        $1 = extract_last_name($1->post_title, $1);
 
-        return strcmp(\$a_last, \$b_last);
+        return strcmp($1, $1);
     });
 
-    foreach ( \$pages as \$page ) {
-        \$parts = explode( ' ', \$page->post_title );
-        \$last = strtolower(end( \$parts ));
-        if (in_array(trim(\$last, '.'), ['jr', 'sr', 'ii', 'iii', 'iv'])) {
-            array_pop(\$parts);
-            \$last = strtolower(end( \$parts ));
+    foreach ( $1 as $1 ) {
+        $1 = explode( ' ', $1->post_title );
+        $1 = strtolower(end( $1 ));
+        if (in_array(trim($1, '.'), ['jr', 'sr', 'ii', 'iii', 'iv'])) {
+            array_pop($1);
+            $1 = strtolower(end( $1 ));
         }
         $initial = strtoupper( $last[0] ?? '#' );
         $grouped[ $initial ][] = $page;
