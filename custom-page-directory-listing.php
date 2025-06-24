@@ -14,6 +14,16 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+function extract_last_name($title, $suffixes) {
+    $parts = explode(' ', trim($title));
+    $last = strtolower(end($parts));
+    if (in_array(trim($last, '.'), $suffixes)) {
+        array_pop($parts);
+        $last = strtolower(end($parts));
+    }
+    return $last;
+}
+
 function pdl_shortcode_output( $atts ) {
     $atts = shortcode_atts([
         'parent_id' => 0,
@@ -25,33 +35,21 @@ function pdl_shortcode_output( $atts ) {
         'sort_order' => 'asc',
     ]);
 
-    $grouped = [];
+    $suffixes = ['jr', 'sr', 'ii', 'iii', 'iv'];
 
-    usort($1, function($1, $1) {
-        $1 = ['jr', 'sr', 'ii', 'iii', 'iv'];
-
-        function extract_last_name($1, $1) {
-            $1 = explode(' ', trim($1));
-            $1 = strtolower(end($1));
-            if (in_array(trim($1, '.'), $1)) {
-                array_pop($1); // remove suffix
-                $1 = strtolower(end($1));
-            }
-            return $1;
-        }
-
-        $1 = extract_last_name($1->post_title, $1);
-        $1 = extract_last_name($1->post_title, $1);
-
-        return strcmp($1, $1);
+    usort($pages, function($a, $b) use ($suffixes) {
+        $a_last = extract_last_name($a->post_title, $suffixes);
+        $b_last = extract_last_name($b->post_title, $suffixes);
+        return strcmp($a_last, $b_last);
     });
 
-    foreach ( $1 as $1 ) {
-        $1 = explode( ' ', $1->post_title );
-        $1 = strtolower(end( $1 ));
-        if (in_array(trim($1, '.'), ['jr', 'sr', 'ii', 'iii', 'iv'])) {
-            array_pop($1);
-            $1 = strtolower(end( $1 ));
+    $grouped = [];
+    foreach ( $pages as $page ) {
+        $parts = explode( ' ', $page->post_title );
+        $last = strtolower(end( $parts ));
+        if (in_array(trim($last, '.'), $suffixes)) {
+            array_pop($parts);
+            $last = strtolower(end( $parts ));
         }
         $initial = strtoupper( $last[0] ?? '#' );
         $grouped[ $initial ][] = $page;
@@ -64,7 +62,6 @@ function pdl_shortcode_output( $atts ) {
     $output .= '<div class="pdl-tabs">';
     foreach ( $grouped as $letter => $group ) {
         $output .= '<button class="pdl-tab" data-letter="' . esc_attr( $letter ) . '">' . esc_html( $letter ) . '</button> ';
-      
     }
     $output .= '</div>';
 
