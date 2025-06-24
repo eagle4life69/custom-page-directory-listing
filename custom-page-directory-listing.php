@@ -2,7 +2,7 @@
 /*
  Plugin Name: Page Directory Listing
  Description: Displays child pages of a specified parent page, grouped alphabetically by last name using tabs.
- Version: 1.4.1
+ Version: 1.5.0
  Author: Andrew Rhynes
  Author URI: https://github.com/eagle4life69
  GitHub Plugin URI: https://github.com/eagle4life69/custom-page-directory-listing/
@@ -11,7 +11,6 @@
  License URI: https://www.gnu.org/licenses/gpl-2.0.html
  Text Domain: page-directory-listing
  */
-
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -28,9 +27,32 @@ function pdl_shortcode_output( $atts ) {
 
     $grouped = [];
 
-    foreach ( $pages as $page ) {
-        $parts = explode( ' ', $page->post_title );
-        $last = end( $parts );
+    usort(\$pages, function(\$a, \$b) {
+        \$suffixes = ['jr', 'sr', 'ii', 'iii', 'iv'];
+
+        function extract_last_name(\$title, \$suffixes) {
+            \$parts = explode(' ', trim(\$title));
+            \$last = strtolower(end(\$parts));
+            if (in_array(trim(\$last, '.'), \$suffixes)) {
+                array_pop(\$parts); // remove suffix
+                \$last = strtolower(end(\$parts));
+            }
+            return \$last;
+        }
+
+        \$a_last = extract_last_name(\$a->post_title, \$suffixes);
+        \$b_last = extract_last_name(\$b->post_title, \$suffixes);
+
+        return strcmp(\$a_last, \$b_last);
+    });
+
+    foreach ( \$pages as \$page ) {
+        \$parts = explode( ' ', \$page->post_title );
+        \$last = strtolower(end( \$parts ));
+        if (in_array(trim(\$last, '.'), ['jr', 'sr', 'ii', 'iii', 'iv'])) {
+            array_pop(\$parts);
+            \$last = strtolower(end( \$parts ));
+        }
         $initial = strtoupper( $last[0] ?? '#' );
         $grouped[ $initial ][] = $page;
     }
